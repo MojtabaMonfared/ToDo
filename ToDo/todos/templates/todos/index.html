@@ -5,36 +5,12 @@
 </head>
 
 <body>
+
     <h1>My To-Do app - v1</h1>
-    <form action="" method="post">
-        {% csrf_token %}
-        {{ form }}
-        <input type="submit" name="add_task" value="Add new task >">
-    </form>
 
-    <table>
-        <tr>
-            <th>Title</th>
-            <th>Discription</th>
-            <th>Priority</th>
-            <th>Delete?</th>
-        </tr>
-        {% for task in tasks %}
-        <tr>
-            <td>{{ task.title }}</td>
-            <td>{{ task.description }}</td>
-            <td>{{ task.priority }}</td>
-            <td>
-                <form action="" method="post">
-                    {% csrf_token %}
-                    <input type="hidden" name="task_id" value="{{ task.id }}">
-                    <input type="submit" name="delete_task" value="Delete">
-                </form>
-            </td>
-        </tr>
-        {% endfor %}
-    </table>
-
+    {% block content %}
+      
+    {% endblock content %}
 </body>
 
 </html>

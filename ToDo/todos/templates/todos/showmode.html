@@ -1,0 +1,25 @@
+{% extends "todos/index.html" %}
+
+{% block content %}
+  
+<a href="{% url 'editmode' %}">Switch to edit mode</a><br><br><br>
+
+<h2>Show mode</h2>
+    <table>
+        <tr>
+            <th>Title</th>
+        </tr>
+        {% for task in tasks %}
+        
+        <tr>
+            <td>
+                <a href="{% url 'task-view' task.id %}">
+                    {{ task.title }}
+                </a>
+            </td>
+        </tr>
+
+        {% endfor %}
+    </table>
+
+    {% endblock content %}

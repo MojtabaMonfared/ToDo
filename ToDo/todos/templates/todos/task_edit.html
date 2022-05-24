@@ -1,0 +1,14 @@
+{% extends "todos/index.html" %}
+{% load static %}
+
+{% block content %}
+<form action="" method="post">
+    {% csrf_token %}
+    {{ form.media }}
+    {{ form.as_p }}
+    <input type="submit" value="Edit...">
+    
+</form>   
+<a href="{% url 'editmode' %}">Go back to edit mode page</a>
+
+{% endblock content %}

@@ -1,0 +1,6 @@
+<h4>title: {{ task.title }}</h4>
+Description: {{ task.description|safe }}
+<p>Priority: {{ task.priority }}</p>
+<p>Created: {{ task.date }}</p><br><br><br><br>
+
+<a href="{% url 'showmode' %}">Go back to main page</a>
