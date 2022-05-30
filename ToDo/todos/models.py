@@ -1,9 +1,8 @@
 from django.db import models
-from ckeditor.fields import RichTextField
 
 class Tasks(models.Model):
-    title = models.CharField(max_length=200, blank=True, null=False)
-    description = RichTextField()
+    title = models.CharField(max_length=200)
+    description = models.TextField()
     date = models.DateTimeField(auto_now_add=True)
     priority = models.IntegerField(default=0)
     # status = models.BooleanField(name="Done?", default=False)

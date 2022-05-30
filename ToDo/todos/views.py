@@ -19,7 +19,7 @@ def EditMode(request):
             task.delete()
             return redirect('/editmode/')
             
-    return render(request, 'todos/editmode.html', {'tasks': tasks, 'form': form})
+    return render(request, 'todos/editmode.html', {'tasks': tasks, 'form': form, 'editmode': True})
 
 def ShowMode(request):
     tasks = Tasks.objects.all()

@@ -1,16 +1,24 @@
+{% load static %}
 <html>
 
 <head>
     <title>To-Do</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://unpkg.com/htmx.org@1.7.0" integrity="sha384-EzBXYPt0/T6gxNp0nuPtLkmRpmDBbjg6WmCUZRLXBBwYYmwAUxzlSGej0ARHX0Bo" crossorigin="anonymous"></script>
+    <!-- <link rel="stylesheet" href="{% static 'css/style.css' %}"> -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+    <link rel="icon" href="{% static 'favicon.ico' %}">
 </head>
 
 <body>
 
-    <h1>My To-Do app - v1</h1>
+    {% include "todos/navbar.html" %}
 
     {% block content %}
-      
+    
     {% endblock content %}
+
 </body>
 
 </html>
