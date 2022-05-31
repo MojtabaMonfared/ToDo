@@ -1,6 +1,28 @@
-<h4>title: {{ task.title }}</h4>
-Description: {{ task.description|safe }}
-<p>Priority: {{ task.priority }}</p>
-<p>Created: {{ task.date }}</p><br><br><br><br>
+{% extends "todos/index.html" %}
 
-<a href="{% url 'showmode' %}">Go back to main page</a>
+{% block content %}
+    <div class="flex flex-wrap items-center justify-center overflow-x-auto px-20 bg-gray-400 rounded-2xl">
+        <table class="table-fixed">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Priority</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for task in tasks %}
+                    <tr>
+                        <td>
+                            <a href="{% url 'view-task' task.id %}">
+                                {{ task.title }}
+                            </a>
+                        </td>
+                        <td>{{ task.priority }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    
+    <a href="{% url 'editmode' %}">Go Back</a>
+{% endblock content %}

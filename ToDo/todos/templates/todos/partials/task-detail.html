@@ -1,0 +1,19 @@
+<div class="lg:w-2/4 mx-4 lg:mx-auto p-4 bg-gray-200 rounded-xl">
+    <div class="space-y-3">
+        title:
+        <h1>{{ task.title|safe }}</h1><br><br>
+        description:
+        <p>{{ task.description|safe }}</p><br><br>
+        Priority:
+        <p>{{ task.priority }}</p><br>
+
+        <button
+            class="px-5 py-5 text-white bg-blue-500 hover:ring-4 hover:ring-blue-300 rounded-md shadow-lg hover:shadow-none"
+            hx-get="{% url 'task-edit-form' task.id %}"
+            hx-target="#task-details"
+            >
+            Edit
+        </button>
+        <a class="bg-lime-200 text-black rounded-full px-2 py-2 shadow-sm hover:ring-2 hover:ring-pink-500/40" href="{% url 'tasks-list' %}"><</a>
+    </div>
+</div>

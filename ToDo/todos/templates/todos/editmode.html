@@ -3,46 +3,25 @@
 
 {% block content %}
 
-<div class="flex justify-center">
-<div class="flex justify-center items-center p-2 mb-3 mt-3 w-1/2 rounded-xl shadow-lg bg-gray-100">
-    <form action="" method="post">
-        
-        {% csrf_token %}
-        {{ form.as_p }}
-
-        <input name="add_task" class="flex sm:inline-flex justify-center items-center mt-2 bg-gradient-to-tr from-indigo-500 to-purple-400 hover:from-indigo-600 hover:to-purple-500 active:from-indigo-700 active:to-purple-600 focus-visible:ring ring-indigo-300 text-white font-semibold text-center rounded-md outline-none transition duration-100 px-5 py-2" type="submit">
-    </form>
-</div>
-</div>
-
-
-<table>
-    <tr>
-        <th>Title</th>
-        <th>Priority</th>
-        <th>Delete?</th>
-        <th>Edit</th>
-    </tr>
-    {% for task in tasks %}
-    <tr>
-        <td>
-            <a href="{% url 'task-view' task.id %}">
-                {{ task.title }}
-            </a>
-        </td>
-        <td>{{ task.priority }}</td>
-        <td>
+    <div class="flex justify-center">
+        <div class="flex justify-center items-center p-2 mb-3 mt-3 w-1/2 rounded-xl shadow-lg bg-gray-100">
             <form action="" method="post">
+                
                 {% csrf_token %}
-                <input type="hidden" name="task_id" value="{{ task.id }}">
-                <input type="submit" name="delete_task" value="Delete">
+                {{ form.as_p }}
+
+                <button class="flex sm:inline-flex justify-center items-center mt-2 bg-gradient-to-tr from-indigo-500 to-purple-400 hover:from-indigo-600 hover:to-purple-500 active:from-indigo-700 active:to-purple-600 focus-visible:ring ring-indigo-300 text-white font-semibold text-center rounded-md outline-none transition duration-100 px-5 py-2" type="submit">Add</button>
+                <!-- <a class="flex sm:inline-flex justify-center items-center mt-2 bg-gradient-to-tr from-orange-500 to-yellow-400 hover:from-orange-600 hover:to-yellow-500 active:from-orange-700 active:to-yellow-600 focus-visible:ring ring-orange-300 text-white font-semibold text-center rounded-md outline-none transition duration-100 px-5 py-2" href="{% url 'tasks-list' %}">Task List</a> -->
             </form>
-        </td>
-        <td>
-            <a href="{% url 'task-edit' task.id %}">Edit</a>
-        </td>
-    </tr>
-    {% endfor %}
-</table>
+        </div>
+    </div>
+
+    <div class="lg:w-2/4 mx-4 lg:mx-auto p-4 bg-white rounded-xl">
+        <div class="chat-messages space-y-3">
+    {% block list %}
+        
+    {% endblock list %}
+        </div>
+    </div>
 
 {% endblock content %}

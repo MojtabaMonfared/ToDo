@@ -10,8 +10,8 @@
         
         <tr>
             <td>
-                <a href="{% url 'task-view' task.id %}">
-                    {{ task.title }}
+                <a href="{% url 'view-task' task.id %}">
+                    {{ task.title|safe }}
                 </a>
             </td>
         </tr>

@@ -5,9 +5,10 @@
     <title>To-Do</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="https://unpkg.com/htmx.org@1.7.0" integrity="sha384-EzBXYPt0/T6gxNp0nuPtLkmRpmDBbjg6WmCUZRLXBBwYYmwAUxzlSGej0ARHX0Bo" crossorigin="anonymous"></script>
     <!-- <link rel="stylesheet" href="{% static 'css/style.css' %}"> -->
-    <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+    <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+    <!-- load HTMX from static -->
+    <script src="{% static 'js/htmx.min.js' %}" defer></script>
     <link rel="icon" href="{% static 'favicon.ico' %}">
 </head>
 
@@ -19,6 +20,12 @@
     
     {% endblock content %}
 
+    <!-- :) -->
+    <script>
+        document.body.addEventListener('htmx:configRequest', (event) => {
+            event.detail.headers['X-CSRFToken'] = '{{ csrf_token }}';
+        })
+    </script>
 </body>
 
 </html>

@@ -1,14 +1,24 @@
-{% extends "todos/index.html" %}
-{% load static %}
+{% extends "todos/editmode.html" %}
 
-{% block content %}
-<form action="" method="post">
-    {% csrf_token %}
-    {{ form.media }}
-    {{ form.as_p }}
-    <input type="submit" value="Edit...">
-    
-</form>   
-<a href="{% url 'editmode' %}">Go back to edit mode page</a>
+{% block list %}
+    {% for task in tasks %}
+    <form>
+        {% csrf_token %}
+        <div class="p-4 bg-gray-200 rounded-xl">
+            {{ form.as_p }}
+            <button hx-get="{% url 'edit-task' task.id%}">
+                Edit
+            </button>
+        </div>
+    </form>
+    {% endfor %}
 
-{% endblock content %}
+{% endblock list %}
+
+
+
+
+
+<h2>Title: {{ task.title }}</h2><br>
+        <p>Description{{ task.description }}</p><br>
+        <p>Priority: {{ task.priority }}</p>

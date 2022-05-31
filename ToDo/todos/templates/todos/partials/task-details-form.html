@@ -1,0 +1,10 @@
+<div class="lg:w-2/4 mx-4 lg:mx-auto p-4 bg-gray-200 rounded-xl">
+    <div class="space-y-3">
+        <form hx-put="{% url 'view-task' task.id %}" hx-target="#task-details">
+            {% csrf_token %}
+            {{ form.as_p|safe }}
+
+            <button class="px-3 py3 rounded-md bg-indigo-600 text-white shadow-md" type="submit">Done</button>
+        </form>
+    </div>
+</div>

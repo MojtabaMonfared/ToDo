@@ -1,41 +1,59 @@
-from django.shortcuts import redirect, render
-from django.views.generic import DeleteView
+from django.http import QueryDict
+from django.shortcuts import get_object_or_404, redirect, render
 
 from .forms import TaskForm
 
 from .models import Tasks
-   
-def EditMode(request):
-    tasks = Tasks.objects.all()
-    form = TaskForm()
-    if request.method == 'POST':
-        if request.POST.get('add_task'):
-            form = TaskForm(request.POST)
-            if form.is_valid():
-                form.save()
-                return redirect('/editmode/')
-        if request.POST.get('delete_task'):
-            task = Tasks.objects.get(id=request.POST.get('task_id'))
-            task.delete()
-            return redirect('/editmode/')
-            
-    return render(request, 'todos/editmode.html', {'tasks': tasks, 'form': form, 'editmode': True})
 
+
+# Show-mode where you can only watch tasks
 def ShowMode(request):
     tasks = Tasks.objects.all()
     return render(request, 'todos/showmode.html', {'tasks': tasks})
 
 
-def TaskEdit(request, id):
-    task = Tasks.objects.get(id=id)
-    form = TaskForm(instance=task)
+# Create new task at editmode
+def CreateTask(request):
+    tasks = Tasks.objects.all()
+    form = TaskForm()
     if request.method == 'POST':
-        form = TaskForm(request.POST, instance=task)
+        form = TaskForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('/editmode/%s' % id)
-    return render(request, 'todos/task_edit.html', {'form': form})
+            return redirect('editmode')
+    return render(request, 'todos/editmode.html', {'tasks': tasks, 'form': form, 'editmode': True})
 
-def TaskView(request, id):
+
+# Delete a task by `id` in the url
+def DeleteTask(request, id):
     task = Tasks.objects.get(id=id)
-    return render(request, 'todos/task.html', {'task': task})
+    task.delete()
+    return redirect('editmode')
+
+
+# View all tasks
+def TasksList(request):
+    tasks = Tasks.objects.all()
+    context = {'tasks': tasks}
+    return render(request, 'todos/task.html', context)
+
+# View tasks detail in new page
+def TaskView(request, pk):
+    task = get_object_or_404(Tasks, pk=pk)
+    context = {'task': task}
+    if request.method == 'GET':
+        return render(request, 'todos/tasks.html', context)
+    elif request.method == 'PUT':
+        data = QueryDict(request.body).dict()
+        form = TaskForm(data, instance=task)
+        if form.is_valid():
+            form.save()
+            return render(request, 'todos/partials/task-detail.html', context)
+        context['form'] = form
+        return render(request, 'todos/partials/task-details-form.html', context)
+
+def TaskEditForm(request, pk):
+    task = get_object_or_404(Tasks, pk=pk)
+    form = TaskForm(instance=task)
+    context = {'task': task, 'form': form}
+    return render(request, 'todos/partials/task-details-form.html', context)
