@@ -1,8 +1,8 @@
 from django.db import models
 
 class Tasks(models.Model):
-    title = models.CharField(max_length=200)
-    description = models.TextField()
+    title = models.CharField(max_length=200, null=False, blank=False)
+    description = models.TextField(null=True, blank=True)
     date = models.DateTimeField(auto_now_add=True)
     priority = models.IntegerField(default=0)
     # status = models.BooleanField(name="Done?", default=False)
