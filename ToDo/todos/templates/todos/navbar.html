@@ -1,4 +1,4 @@
-<nav class="flex flex-wrap sticky justify-between items-center p-5 m-5 {% if editmode %} bg-orange-300 {% else %} bg-lime-300 {% endif %} rounded-lg shadow-lg">
+<nav class="flex flex-wrap sticky justify-between items-center p-5 m-5 {% if editmode %} bg-orange-300 {% else %} bg-emerald-500 {% endif %} rounded-lg shadow-lg">
     <div class="items-start">
         {% if editmode %}
         <p class="text-orange-900 text-base px-4 py-2 sm:text-xl">
@@ -14,7 +14,7 @@
         {% if editmode %}
             <a href="/" class="bg-orange-700 text-white rounded-md shadow-lg hover:shadow-sm px-4 py-2 ease-in-out duration-500">Switch to Show Mode</a>
         {% else %}
-            <a href="{% url 'editmode' %}" class="bg-lime-700 text-gray-50 rounded-sm shadow-md focus:shadow-sm px-4 py-2 hover:px-8 ease-in-out duration-500">Switch to Edit mode</a>
+            <a href="{% url 'editmode' %}" class="bg-emerald-700 text-gray-50 rounded-sm shadow-md focus:shadow-sm px-4 py-2 hover:px-8 ease-in-out duration-500">Switch to Edit mode</a>
         {% endif %}
     </div>
 </nav>

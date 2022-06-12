@@ -1,5 +1,5 @@
 <div class="flex flex-wrap justify-center items-center w-auto h-1/2">
-    <div class="w-1/2 h-auto bg-gray-300 space-y-2 p-8">
+    <div class="transition-all w-1/2 h-auto hover:shadow-lg space-y-2 p-8 backdrop-blur-xl">
         {% for task in tasks %}
             <div class="flex justify-between transition-all p-8 bg-white rounded-md hover:shadow-lg ring-1 ring-indigo-400">
                 <p class="self-center">{{ task.title }}</p>
