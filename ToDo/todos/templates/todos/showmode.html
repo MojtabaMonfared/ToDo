@@ -2,21 +2,6 @@
 
 {% block content %}
 
-    <table>
-        <tr>
-            <th>Title</th>
-        </tr>
-        {% for task in tasks %}
-        
-        <tr>
-            <td>
-                <a href="{% url 'view-task' task.id %}">
-                    {{ task.title|safe }}
-                </a>
-            </td>
-        </tr>
+    {% include "todos/partials/task-list.html" %}
 
-        {% endfor %}
-    </table>
-
-    {% endblock content %}
+{% endblock content %}

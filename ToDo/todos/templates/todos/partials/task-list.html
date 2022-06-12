@@ -1,0 +1,13 @@
+<div class="flex flex-wrap justify-center items-center w-auto h-1/2">
+    <div class="w-1/2 h-auto bg-gray-300 space-y-2 p-8">
+        {% for task in tasks %}
+            <div class="flex justify-between transition-all p-8 bg-white rounded-md hover:shadow-lg ring-1 ring-indigo-400">
+                <p class="self-center">{{ task.title }}</p>
+                <a href="{% url 'view-task' task.id %}" class="bg-green-600 text-white rounded-md focus:shadow-inner justify-end px-4 py-2">
+                    View
+                </a>
+            </div>
+        {% endfor %}
+
+    </div>
+</div>

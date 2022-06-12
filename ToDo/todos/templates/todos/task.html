@@ -1,28 +1,7 @@
 {% extends "todos/index.html" %}
 
 {% block content %}
-    <div class="flex flex-wrap items-center justify-center overflow-x-auto px-20 bg-gray-400 rounded-2xl">
-        <table class="table-fixed">
-            <thead>
-                <tr>
-                    <th>Title</th>
-                    <th>Priority</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for task in tasks %}
-                    <tr>
-                        <td>
-                            <a href="{% url 'view-task' task.id %}">
-                                {{ task.title }}
-                            </a>
-                        </td>
-                        <td>{{ task.priority }}</td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
     
-    <a href="{% url 'editmode' %}">Go Back</a>
+    {% include "todos/partials/task-list.html" %}
+    
 {% endblock content %}
