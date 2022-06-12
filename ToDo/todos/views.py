@@ -28,7 +28,7 @@ def CreateTask(request):
 def DeleteTask(request, id):
     task = Tasks.objects.get(id=id)
     task.delete()
-    return redirect('tasks-list')
+    return redirect('editmode')
 
 
 # View all tasks

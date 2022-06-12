@@ -1,3 +1,4 @@
+<title>{{ task.title }} | ToDo</title>
 <div class="lg:w-2/4 mx-4 lg:mx-auto p-4 bg-gray-200 rounded-xl">
     <div class="space-y-3">
         title:
@@ -8,16 +9,16 @@
         <p>{{ task.priority }}</p><br>
 
         <button
-            class="px-5 py-5 text-white bg-blue-500 hover:ring-4 hover:ring-blue-300 rounded-md shadow-lg hover:shadow-none"
+            class="px-4 py-2 text-white bg-blue-500 hover:ring-4 hover:ring-blue-300 rounded-md shadow-lg hover:shadow-none"
             hx-get="{% url 'task-edit-form' task.id %}"
             hx-target="#task-details"
             >
             Edit
         </button>
-        <a class="bg-lime-200 text-black rounded-full px-2 py-2 shadow-sm hover:ring-2 hover:ring-pink-500/40 mx-2 my-2" href="{% url 'showmode' %}"> Back to Tasks List </a>
+        <a class="px-4 py-2 text-pink-900 bg-pink-200  rounded-md shadow-sm hover:ring-4 hover:ring-pink-300 mx-2 my-2" href="{% url 'showmode' %}"> Back to Show Mode </a>
 
         <a
-            class="bg-red-600 text-white hover:shadow-lg hover:shadow-red-400 px-2 py-2"
+            class="px-4 py-2 text-white bg-red-600 rounded-md shadow-md hover:ring-4 hover:ring-red-300 mx-2 my-2"
             href="{% url 'delete-task' task.id %}"
         >Delete this Task</a>
     </div>
