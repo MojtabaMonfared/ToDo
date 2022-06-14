@@ -1,10 +1,14 @@
 from django.http import QueryDict
 from django.shortcuts import get_object_or_404, redirect, render
+from django.contrib import messages
 
 from .forms import TaskForm
 
 from .models import Tasks
 
+created_message = "Task '%s' created successfully!"
+deleted_message = "Task '%s' deleted successfully!"
+edited_message = "Task '%s' edited successfully!"
 
 # Show-mode where you can only watch tasks
 def ShowMode(request):
@@ -20,6 +24,7 @@ def CreateTask(request):
         form = TaskForm(request.POST)
         if form.is_valid():
             form.save()
+            messages.add_message(request, messages.INFO, created_message % form.cleaned_data['title'])
             return redirect('editmode')
     return render(request, 'todos/editmode.html', {'tasks': tasks, 'form': form, 'editmode': True})
 
@@ -28,6 +33,7 @@ def CreateTask(request):
 def DeleteTask(request, id):
     task = Tasks.objects.get(id=id)
     task.delete()
+    messages.add_message(request, messages.ERROR, deleted_message % task.title)
     return redirect('editmode')
 
 
@@ -48,6 +54,7 @@ def TaskView(request, pk):
         form = TaskForm(data, instance=task)
         if form.is_valid():
             form.save()
+            messages.add_message(request, messages.INFO, edited_message % task.title)
             return render(request, 'todos/partials/task-detail.html', context)
         context['form'] = form
         return render(request, 'todos/partials/task-details-form.html', context)
@@ -55,5 +62,8 @@ def TaskView(request, pk):
 def TaskEditForm(request, pk):
     task = get_object_or_404(Tasks, pk=pk)
     form = TaskForm(instance=task)
-    context = {'task': task, 'form': form}
+    context = {
+        'task': task,
+        'form': form,
+    }
     return render(request, 'todos/partials/task-details-form.html', context)
