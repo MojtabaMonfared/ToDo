@@ -12,4 +12,3 @@ class Tasks(models.Model):
     
     class Meta:
         verbose_name_plural = "tasks"
-        ordering = ["-priority"]
